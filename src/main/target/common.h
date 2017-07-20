@@ -34,7 +34,7 @@
 #if (FLASH_SIZE > 64)
 #define BLACKBOX
 #define GPS
-#define GPS_PROTO_UBLOX
+#define GPS_PROTO_NMEA
 #define NAV
 #define USE_FLM_TURN_ASSIST     // This is mandatory for fixed-wing navigation
 #define TELEMETRY

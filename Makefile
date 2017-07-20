@@ -16,7 +16,7 @@
 #
 
 # The target to build, see VALID_TARGETS below
-TARGET    ?= NAZE
+TARGET    ?= CC3D_PPM1
 
 # Compile-time options
 OPTIONS   ?=

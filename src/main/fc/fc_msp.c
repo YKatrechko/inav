@@ -838,6 +838,11 @@ static bool mspFcProcessOutCommand(uint8_t cmdMSP, sbuf_t *dst, mspPostProcessFn
         sbufWriteU16(dst, gpsSol.eph);
         sbufWriteU16(dst, gpsSol.epv);
         break;
+        
+    case MSP_GPSDATETIME:
+        sbufWriteU32(dst, gpsSol.dt.date);
+        sbufWriteU32(dst, gpsSol.dt.time);
+        break;
 #endif
     case MSP_DEBUG:
         // output some useful QA statistics

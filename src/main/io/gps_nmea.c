@@ -92,12 +92,17 @@ typedef struct gpsDataNmea_s {
     uint16_t speed;
     uint16_t ground_course;
     uint16_t hdop;
+    uint32_t time;  // Time, hhmmss,
+    uint32_t date;  // Date, ddmmyy
 } gpsDataNmea_t;
 
 #define NMEA_BUFFER_SIZE        16
 
 static bool gpsNewFrameNMEA(char c)
 {
+    static char arr[6]; 
+    uint8_t i;
+    
     static gpsDataNmea_t gps_Msg;
 
     uint8_t frameOK = 0;
@@ -163,11 +168,20 @@ static bool gpsNewFrameNMEA(char c)
                     break;
                 case FRAME_RMC:        //************* GPRMC FRAME parsing
                     switch (param) {
+                    	    // $GPRMC,113706.899,V,3454.931,N,08102.496,W,68.5,0.51,200717,,E*48
+                        case 1:  // Time information
+                            for(i = 0; i < 6; i++)  arr[i] = string[i];
+//                            arr[6] = '\0';
+                            gps_Msg.time = grab_fields(arr, 0);
+                            break;
                         case 7:
                             gps_Msg.speed = ((grab_fields(string, 1) * 5144L) / 1000L);    // speed in cm/s added by Mis
                             break;
                         case 8:
                             gps_Msg.ground_course = (grab_fields(string, 1));      // ground course deg * 10
+                            break;
+                        case 9:  // Date information
+                            gps_Msg.date = grab_fields(string, 0);
                             break;
                     }
                     break;
@@ -201,7 +215,7 @@ static bool gpsNewFrameNMEA(char c)
                             gpsSol.hdop = gpsConstrainHDOP(gps_Msg.hdop);
                             gpsSol.eph = gpsConstrainEPE(gps_Msg.hdop * GPS_HDOP_TO_EPH_MULTIPLIER);
                             gpsSol.epv = gpsConstrainEPE(gps_Msg.hdop * GPS_HDOP_TO_EPH_MULTIPLIER);
-                            gpsSol.flags.validEPE = 0;
+                            gpsSol.flags.validEPE = 0;                            
                         }
                         else {
                             gpsSol.fixType = GPS_NO_FIX;
@@ -214,6 +228,8 @@ static bool gpsNewFrameNMEA(char c)
                     case FRAME_RMC:
                         gpsSol.groundSpeed = gps_Msg.speed;
                         gpsSol.groundCourse = gps_Msg.ground_course;
+                        gpsSol.dt.time = gps_Msg.time;
+                        gpsSol.dt.date = gps_Msg.date;
                         break;
                     } // end switch
                 }

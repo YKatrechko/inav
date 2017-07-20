@@ -103,6 +103,11 @@ typedef struct gpsLocation_s {
     int32_t alt;    // Altitude in centimeters (meters * 100)
 } gpsLocation_t;
 
+typedef struct gpsDateTime_s {
+    uint32_t time;  // hhmmss
+    uint32_t date;  // ddmmyy
+} gpsDateTime_t;
+
 typedef struct gpsSolutionData_s {
     struct {
         unsigned gpsHeartbeat   : 1;     // Toggle each update
@@ -126,6 +131,8 @@ typedef struct gpsSolutionData_s {
     uint16_t epv;   // vertical accuracy (cm)
 
     uint16_t hdop;  // generic HDOP value (*100)
+    
+    gpsDateTime_t dt; // date & time
 } gpsSolutionData_t;
 
 typedef struct {
