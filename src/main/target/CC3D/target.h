@@ -40,11 +40,11 @@
 #define MPU6000_CS_PIN          PA4
 #define MPU6000_SPI_INSTANCE    SPI1
 
-#define M25P16_CS_PIN           PB12
-#define M25P16_SPI_INSTANCE     SPI2
+//#define M25P16_CS_PIN           PB12
+//#define M25P16_SPI_INSTANCE     SPI2
 
-#define USE_FLASHFS
-#define USE_FLASH_M25P16
+//#define USE_FLASHFS
+//#define USE_FLASH_M25P16
 
 #define GYRO
 #define USE_GYRO_SPI_MPU6000
@@ -55,14 +55,14 @@
 #define ACC_MPU6000_ALIGN CW270_DEG
 
 // External I2C BARO
-#define BARO
+//#define BARO
 //#define USE_BARO_MS5611
-#define USE_BARO_BMP085
-#define USE_BARO_BMP280
+//#define USE_BARO_BMP085
+//#define USE_BARO_BMP280
 
 // External I2C MAG
-#define MAG
-#define USE_MAG_HMC5883
+//#define MAG
+//#define USE_MAG_HMC5883
 //#define USE_MAG_AK8975
 //#define USE_MAG_MAG3110
 
@@ -154,7 +154,7 @@
 #define WS2811_DMA_TC_FLAG              DMA1_FLAG_TC6
 #define WS2811_DMA_HANDLER_IDENTIFER    DMA1_CH6_HANDLER
 
-#define SPEKTRUM_BIND
+//#define SPEKTRUM_BIND
 // USART3, PB11 (Flexport)
 #define BIND_PIN                PB11
 
@@ -169,7 +169,7 @@
 //#define NAV_AUTO_MAG_DECLINATION
 //#define NAV_GPS_GLITCH_DETECTION
 
-#define ENABLE_BLACKBOX_LOGGING_ON_SPIFLASH_BY_DEFAULT
+//#define ENABLE_BLACKBOX_LOGGING_ON_SPIFLASH_BY_DEFAULT
 
 #ifdef OPBL
 
